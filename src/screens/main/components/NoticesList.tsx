@@ -1,16 +1,23 @@
 import React from "react";
-import { Notice } from "../../../types/Notice";
+import { Notice } from "~/types/Notice";
 import NoticeListItem from "./NoticeListItem";
 
 interface NoticeListProps {
   notices: Notice[];
+  lastRef: React.RefObject<HTMLDivElement>;
 }
 
-const NoticeList: React.FC<NoticeListProps> = ({ notices }) => {
+const NoticeList: React.FC<NoticeListProps> = ({ notices, lastRef }) => {
   return (
     <>
-      {notices.map((notice) => {
-        return <NoticeListItem notice={notice} key={notice.id} />;
+      {notices.map((notice, i) => {
+        return (
+          <NoticeListItem
+            notice={notice}
+            key={notice.id}
+            lastRef={i === notices.length - 1 ? lastRef : null}
+          />
+        );
       })}
     </>
   );

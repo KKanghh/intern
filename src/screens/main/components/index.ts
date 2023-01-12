@@ -7,22 +7,18 @@ const MainDiv = styled.div`
   letter-spacing: -1px;
   height: 31px;
   margin-bottom: 5px;
-`;
-
-const Divider = styled.div`
-  background-color: #f4f4f4;
-  height: 1px;
+  margin-left: 15px;
 `;
 
 const ListItemDiv = styled.div`
-  margin: 22px 0 20px 0;
+  margin: 22px 15px 20px 15px;
 `;
 
 const ListItemTitle = styled.div`
   font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 16px;
-  height: 25px;
+  min-height: 25px;
   letter-spacing: -0.8px;
 `;
 
@@ -36,7 +32,6 @@ const ListItemDate = styled.div`
 
 const MainComponents = {
   MainDiv,
-  Divider,
   ListItemDiv,
   ListItemTitle,
   ListItemDate,
