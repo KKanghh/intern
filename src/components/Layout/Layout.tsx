@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, useRef, useEffect } from "react";
 import styled from "styled-components";
 import Header from "./Header";
 
@@ -20,13 +20,16 @@ const Container = styled.div`
   overflow-x: hidden;
 `;
 
-const Layout: React.FC<PropsWithChildren> = ({ children }) => (
-  <BackGround>
-    <Container>
-      <Header />
-      {children}
-    </Container>
-  </BackGround>
-);
+const Layout: React.FC<PropsWithChildren> = ({ children }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  return (
+    <BackGround>
+      <Container ref={containerRef}>
+        <Header />
+        {React.cloneElement(children as React.ReactElement, { containerRef })}
+      </Container>
+    </BackGround>
+  );
+};
 
 export default Layout;

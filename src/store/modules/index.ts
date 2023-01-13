@@ -5,10 +5,10 @@ import {
   Reducer,
 } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
-import noticeSlice, { NoticeState } from "./notice";
+import scrollSlice, { ScrollState } from "./scroll";
 
 export interface RootState {
-  notice: NoticeState;
+  scroll: ScrollState;
 }
 
 const rootReducer: Reducer<RootState, AnyAction> = (state, action) => {
@@ -19,7 +19,7 @@ const rootReducer: Reducer<RootState, AnyAction> = (state, action) => {
     };
   }
 
-  return combineReducers({ notice: noticeSlice.reducer })(state, action);
+  return combineReducers({ scroll: scrollSlice.reducer })(state, action);
 };
 
 export default rootReducer;

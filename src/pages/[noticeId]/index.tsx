@@ -36,8 +36,9 @@ export const getStaticProps: GetStaticProps = async (
       props: { title, content },
     };
   } catch (err) {
-    console.error(err);
-    throw new Error("에러");
+    return {
+      props: { title: "", content: "" },
+    };
   }
 };
 

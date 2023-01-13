@@ -12,6 +12,7 @@ const MainDiv = styled.div`
 
 const ListItemDiv = styled.div`
   margin: 22px 15px 20px 15px;
+  cursor: pointer;
 `;
 
 const ListItemTitle = styled.div`

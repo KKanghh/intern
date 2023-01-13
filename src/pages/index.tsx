@@ -3,20 +3,21 @@ import React from "react";
 import MainController from "~/screens/main/MainController";
 import { Notice } from "~/types/Notice";
 import { wrapper } from "~/store";
-import { noticeActions } from "~/store/modules/notice";
 import { NextPage } from "next";
+import { dehydrate, QueryClient } from "@tanstack/react-query";
 
 interface HomePageProps {
+  containerRef: React.RefObject<HTMLDivElement>;
   last: boolean;
 }
 
-const Home: NextPage<HomePageProps> = ({ last }) => (
-  <MainController last={last} />
+const Home: NextPage<HomePageProps> = ({ containerRef, ...props }) => (
+  <MainController containerRef={containerRef} props={props} />
 );
 
 export default Home;
 
-export const getStaticProps = wrapper.getStaticProps((store) => async () => {
+export const getStaticProps = async () => {
   try {
     const res = await axios.get(
       `https://dev-api.tdogtdog.com/post?sort=createdAt,desc&p=1`,
@@ -29,14 +30,13 @@ export const getStaticProps = wrapper.getStaticProps((store) => async () => {
       }
     );
 
-    const { content, last } = res.data;
-    store.dispatch(noticeActions.set(content));
-
     return {
-      props: { last },
+      props: res.data,
     };
+
+    return { props: { last: false } };
   } catch (err) {
     console.error(err);
     return { props: { last: true } };
   }
-});
+};

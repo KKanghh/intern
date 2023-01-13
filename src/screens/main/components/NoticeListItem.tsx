@@ -4,30 +4,40 @@ import MainComponents from ".";
 import dayjs from "dayjs";
 import Link from "next/link";
 import Divider from "~/components/Divider/Divider";
+import { useRouter } from "next/router";
+import { scrollActions } from "~/store/modules/scroll";
+import { useDispatch } from "react-redux";
 
 interface NoticeListItemProps {
   notice: Notice;
   lastRef: React.RefObject<HTMLDivElement> | null;
+  containerRef: React.RefObject<HTMLDivElement>;
 }
 
 const NoticeListItem: React.FC<NoticeListItemProps> = ({
   notice: { id, title, createdAt },
   lastRef,
+  containerRef,
 }) => {
   const date = new Date(createdAt);
-  const now = dayjs();
-  // console.log(now);
+  const display = dayjs(date).format("YYYY.MM.DD");
+  const router = useRouter();
+  const dispatch = useDispatch();
   return (
     <>
-      <MainComponents.ListItemDiv ref={lastRef}>
-        <Link href={`/${id}`}>
-          <MainComponents.ListItemTitle>
-            {title.replace("<br>", " ")}
-          </MainComponents.ListItemTitle>
-          <MainComponents.ListItemDate>
-            {date.toLocaleDateString()}
-          </MainComponents.ListItemDate>
-        </Link>
+      <MainComponents.ListItemDiv
+        ref={lastRef}
+        onClick={() => {
+          dispatch(scrollActions.setScroll(containerRef.current!.scrollTop));
+          router.push(`/${id}`);
+        }}
+      >
+        {/* <Link href={`/${id}`}> */}
+        <MainComponents.ListItemTitle>
+          {title.replace("<br>", " ")}
+        </MainComponents.ListItemTitle>
+        <MainComponents.ListItemDate>{display}</MainComponents.ListItemDate>
+        {/* </Link> */}
       </MainComponents.ListItemDiv>
       <Divider />
     </>
