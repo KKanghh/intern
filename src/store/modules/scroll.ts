@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Notice } from "~/types/Notice";
 
 export interface ScrollState {
   scroll: number;

@@ -1,10 +1,8 @@
 import axios from "axios";
 import React from "react";
 import MainController from "~/screens/main/MainController";
-import { Notice } from "~/types/Notice";
-import { wrapper } from "~/store";
 import { NextPage } from "next";
-import { dehydrate, QueryClient } from "@tanstack/react-query";
+import request from "~/libs/getPost";
 
 interface HomePageProps {
   containerRef: React.RefObject<HTMLDivElement>;
@@ -19,15 +17,9 @@ export default Home;
 
 export const getStaticProps = async () => {
   try {
-    const res = await axios.get(
-      `https://dev-api.tdogtdog.com/post?sort=createdAt,desc&p=1`,
-      // "https://dev-api.tdogtdog.com/post/backup?board=announcement",
-      {
-        headers: {
-          "TT-OS": "IOS",
-          "TT-Version": 999,
-        },
-      }
+    const res = await request.get(
+      `/post?sort=createdAt,desc&p=1`
+      // "/post/backup?board=announcement",
     );
 
     return {

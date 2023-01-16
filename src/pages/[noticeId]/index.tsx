@@ -2,6 +2,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { GetStaticProps, GetStaticPaths, GetStaticPropsContext } from "next";
 import NoticeIdController from "~/screens/noticeId/NoticeIdController";
+import request from "~/libs/getPost";
 
 interface NoticePageProps {
   title: string;
@@ -15,22 +16,13 @@ interface ResponseProps {
 const NoticePage: React.FC<NoticePageProps> = ({ title, content }) => (
   <NoticeIdController title={title} content={content} />
 );
-
 export default NoticePage;
 
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext
 ) => {
   try {
-    const res = await axios.get(
-      `https://dev-api.tdogtdog.com/post/${context.params!.noticeId}`,
-      {
-        headers: {
-          "TT-OS": "IOS",
-          "TT-Version": 999,
-        },
-      }
-    );
+    const res = await request.get(`/post/${context.params!.noticeId}`);
     const { title, content } = res.data;
     return {
       props: { title, content },
@@ -44,12 +36,7 @@ export const getStaticProps: GetStaticProps = async (
 
 export const getStaticPaths: GetStaticPaths = async () => {
   try {
-    const res = await axios.get(`https://dev-api.tdogtdog.com/post/backup`, {
-      headers: {
-        "TT-OS": "IOS",
-        "TT-Version": 999,
-      },
-    });
+    const res = await request.get(`/post/backup`);
 
     return {
       paths: res.data.map((notice: ResponseProps) => {

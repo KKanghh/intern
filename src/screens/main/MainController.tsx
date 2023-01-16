@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import axios from "axios";
-import React, { useCallback, useState, useRef, useEffect } from "react";
+import request from "~/libs/getPost";
+import React, { useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "~/store/modules";
 import { scrollActions } from "~/store/modules/scroll";
@@ -21,14 +21,11 @@ const MainController: React.FC<MainControllerProps> = ({
   const dispatch = useDispatch();
   const divRef = useRef<HTMLDivElement>(null);
   const fetchData = async ({ pageParam = 1 }) => {
-    const res = await axios.get(`https://dev-api.tdogtdog.com/post`, {
+    const res = await request.get(`/post`, {
       params: {
         sort: "createdAt,desc",
         p: pageParam,
-      },
-      headers: {
-        "TT-OS": "IOS",
-        "TT-Version": 999,
+        // board: "announcement",
       },
     });
     return res.data;
@@ -57,10 +54,15 @@ const MainController: React.FC<MainControllerProps> = ({
   });
 
   useEffect(() => {
-    if (scroll > 0) {
-      containerRef.current!.scrollTop = scroll;
+    const body = containerRef.current;
+    if (scroll > 0 && body) {
+      body.scrollTop = scroll;
       dispatch(scrollActions.resetScroll());
     }
+
+    return () => {
+      if (body) body.scrollTop = 0;
+    };
   }, []);
 
   useEffect(() => {
@@ -79,14 +81,7 @@ const MainController: React.FC<MainControllerProps> = ({
   }, [fetchNextPage, hasNextPage, data]);
 
   const viewProps: MainViewProps = { notices, divRef, containerRef };
-  return (
-    <>
-      <MainView {...viewProps} />
-      {/* <button onClick={() => fetchNextPage()} disabled={!hasNextPage}>
-        가져오기
-      </button> */}
-    </>
-  );
+  return <MainView {...viewProps} />;
 };
 
 export default MainController;

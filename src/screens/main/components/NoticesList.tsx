@@ -13,14 +13,15 @@ const NoticeList: React.FC<NoticeListProps> = ({
   lastRef,
   containerRef,
 }) => {
+  const length = notices.length;
   return (
     <>
       {notices.map((notice, i) => {
         return (
           <NoticeListItem
-            notice={notice}
             key={notice.id}
-            lastRef={i === notices.length - 1 ? lastRef : null}
+            notice={notice}
+            lastRef={i === length - 1 ? lastRef : null}
             containerRef={containerRef}
           />
         );

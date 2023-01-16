@@ -14,6 +14,8 @@ const BackGround = styled.div`
 const Container = styled.div`
   width: 375px;
   height: 812px;
+  // width: 100%;
+  // height: 100%;
   background-color: white;
   padding: 0 5px;
   overflow-y: scroll;
