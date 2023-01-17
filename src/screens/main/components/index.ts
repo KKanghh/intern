@@ -21,6 +21,7 @@ const ListItemTitle = styled.div`
   font-size: 16px;
   min-height: 25px;
   letter-spacing: -0.8px;
+  word-break: break-all;
 `;
 
 const ListItemDate = styled.div`

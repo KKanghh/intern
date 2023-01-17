@@ -5,12 +5,11 @@ import { NextPage } from "next";
 import request from "~/libs/getPost";
 
 interface HomePageProps {
-  containerRef: React.RefObject<HTMLDivElement>;
   last: boolean;
 }
 
-const Home: NextPage<HomePageProps> = ({ containerRef, ...props }) => (
-  <MainController containerRef={containerRef} props={props} />
+const Home: NextPage<HomePageProps> = ({ ...props }) => (
+  <MainController props={props} />
 );
 
 export default Home;

@@ -10,7 +10,8 @@ import {
   Hydrate,
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { useState, useRef } from "react";
+import { useState } from "react";
+import Loading from "~/components/Loading/Loading";
 
 const App = ({ Component, ...pageProps }: AppProps) => {
   const { store, props } = wrapper.useWrappedStore(pageProps);

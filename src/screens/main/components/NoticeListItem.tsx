@@ -11,13 +11,11 @@ import { useDispatch } from "react-redux";
 interface NoticeListItemProps {
   notice: Notice;
   lastRef: React.RefObject<HTMLDivElement> | null;
-  containerRef: React.RefObject<HTMLDivElement>;
 }
 
 const NoticeListItem: React.FC<NoticeListItemProps> = ({
   notice: { id, title, createdAt },
   lastRef,
-  containerRef,
 }) => {
   const date = new Date(createdAt);
   const display = dayjs(date).format("YYYY.MM.DD");
@@ -28,16 +26,14 @@ const NoticeListItem: React.FC<NoticeListItemProps> = ({
       <MainComponents.ListItemDiv
         ref={lastRef}
         onClick={() => {
-          dispatch(scrollActions.setScroll(containerRef.current!.scrollTop));
+          dispatch(scrollActions.setScroll(window.scrollY));
           router.push(`/${id}`);
         }}
       >
-        {/* <Link href={`/${id}`}> */}
         <MainComponents.ListItemTitle>
           {title.replace("<br>", " ")}
         </MainComponents.ListItemTitle>
         <MainComponents.ListItemDate>{display}</MainComponents.ListItemDate>
-        {/* </Link> */}
       </MainComponents.ListItemDiv>
       <Divider />
     </>

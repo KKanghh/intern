@@ -10,13 +10,9 @@ import { MainViewProps } from "./MainView";
 
 interface MainControllerProps {
   props: any;
-  containerRef: React.RefObject<HTMLDivElement>;
 }
 
-const MainController: React.FC<MainControllerProps> = ({
-  containerRef,
-  props,
-}) => {
+const MainController: React.FC<MainControllerProps> = ({ props }) => {
   const scroll = useSelector<RootState, number>((state) => state.scroll.scroll);
   const dispatch = useDispatch();
   const divRef = useRef<HTMLDivElement>(null);
@@ -34,6 +30,7 @@ const MainController: React.FC<MainControllerProps> = ({
   const {
     data,
     error,
+    isLoading,
     fetchNextPage,
     hasNextPage,
     isFetching,
@@ -54,15 +51,16 @@ const MainController: React.FC<MainControllerProps> = ({
   });
 
   useEffect(() => {
-    const body = containerRef.current;
-    if (scroll > 0 && body) {
-      body.scrollTop = scroll;
-      dispatch(scrollActions.resetScroll());
-    }
+    console.log(isLoading, isFetching);
+  }, [isFetching, isLoading]);
 
-    return () => {
-      if (body) body.scrollTop = 0;
-    };
+  useEffect(() => {
+    if (scroll > 0) {
+      window.scrollTo(0, scroll);
+      dispatch(scrollActions.resetScroll());
+    } else {
+      window.scrollTo(0, 0);
+    }
   }, []);
 
   useEffect(() => {
@@ -80,7 +78,7 @@ const MainController: React.FC<MainControllerProps> = ({
     };
   }, [fetchNextPage, hasNextPage, data]);
 
-  const viewProps: MainViewProps = { notices, divRef, containerRef };
+  const viewProps: MainViewProps = { notices, divRef };
   return <MainView {...viewProps} />;
 };
 

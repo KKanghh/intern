@@ -1,34 +1,31 @@
-import React, { PropsWithChildren, useRef, useEffect } from "react";
+import React, { PropsWithChildren } from "react";
 import styled from "styled-components";
 import Header from "./Header";
 
 const BackGround = styled.div`
   width: 100%;
-  height: 100vh;
-  background-color: #444;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 100%;
+  background-color: Antiquewhite;
 `;
 
 const Container = styled.div`
   width: 375px;
-  height: 812px;
+  min-height: 812px;
   // width: 100%;
-  // height: 100%;
+  height: 100vh;
   background-color: white;
   padding: 0 5px;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
 `;
 
 const Layout: React.FC<PropsWithChildren> = ({ children }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
   return (
     <BackGround>
-      <Container ref={containerRef}>
+      <Container>
         <Header />
-        {React.cloneElement(children as React.ReactElement, { containerRef })}
+        {children}
       </Container>
     </BackGround>
   );

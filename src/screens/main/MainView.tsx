@@ -6,22 +6,13 @@ import NoticeList from "./components/NoticesList";
 export interface MainViewProps {
   notices: Notice[];
   divRef: React.RefObject<HTMLDivElement>;
-  containerRef: React.RefObject<HTMLDivElement>;
 }
 
-const MainView: React.FC<MainViewProps> = ({
-  notices,
-  divRef,
-  containerRef,
-}) => {
+const MainView: React.FC<MainViewProps> = ({ notices, divRef }) => {
   return (
     <>
       <MainComponents.MainDiv>알려드려요</MainComponents.MainDiv>
-      <NoticeList
-        notices={notices}
-        lastRef={divRef}
-        containerRef={containerRef}
-      />
+      <NoticeList notices={notices} lastRef={divRef} />
     </>
   );
 };

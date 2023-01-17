@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { TfiAngleLeft } from "react-icons/tfi";
 
 const Container = styled.div`
-  height: 101px;
+  min-height: 101px;
   padding: 0 0 0 16px;
 
   span {
