@@ -1,8 +1,6 @@
-import axios from "axios";
-import { useRouter } from "next/router";
 import { GetStaticProps, GetStaticPaths, GetStaticPropsContext } from "next";
 import NoticeIdController from "~/screens/noticeId/NoticeIdController";
-import request from "~/libs/getPost";
+import request from "~/libs/axios";
 
 interface NoticePageProps {
   title: string;

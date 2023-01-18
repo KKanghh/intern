@@ -1,6 +1,5 @@
 import React from "react";
 import NoticeIdTitle from "./components/NoticeIdTitle";
-import NoticeIDComponents from "./components";
 import NoticeIdContent from "./components/NoticeIdContent";
 
 export interface NoticeIdViewProps {

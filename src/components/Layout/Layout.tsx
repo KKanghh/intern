@@ -4,7 +4,7 @@ import Header from "./Header";
 
 const BackGround = styled.div`
   width: 100%;
-  height: 100%;
+  // min-height: 100vh;
   background-color: Antiquewhite;
 `;
 
@@ -18,6 +18,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  // overflow-y: scroll;
 `;
 
 const Layout: React.FC<PropsWithChildren> = ({ children }) => {

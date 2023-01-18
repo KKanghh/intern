@@ -1,5 +1,9 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
-import request from "~/libs/getPost";
+import {
+  InfiniteData,
+  useInfiniteQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
+import request from "~/libs/axios";
 import React, { useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "~/store/modules";
@@ -13,6 +17,7 @@ interface MainControllerProps {
 }
 
 const MainController: React.FC<MainControllerProps> = ({ props }) => {
+  const queryClient = useQueryClient();
   const scroll = useSelector<RootState, number>((state) => state.scroll.scroll);
   const dispatch = useDispatch();
   const divRef = useRef<HTMLDivElement>(null);
@@ -38,7 +43,7 @@ const MainController: React.FC<MainControllerProps> = ({ props }) => {
     status,
   } = useInfiniteQuery(["notice"], fetchData, {
     getNextPageParam: (lastPage, page) => {
-      if (lastPage.last) return false;
+      if (lastPage?.last) return false;
       return page.length + 1;
     },
     initialData: { pages: [props], pageParams: [1] },
@@ -49,10 +54,6 @@ const MainController: React.FC<MainControllerProps> = ({ props }) => {
   responses?.forEach((response) => {
     notices = notices.concat(response);
   });
-
-  useEffect(() => {
-    console.log(isLoading, isFetching);
-  }, [isFetching, isLoading]);
 
   useEffect(() => {
     if (scroll > 0) {

@@ -11,11 +11,12 @@ import {
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { useState } from "react";
-import Loading from "~/components/Loading/Loading";
 
 const App = ({ Component, ...pageProps }: AppProps) => {
   const { store, props } = wrapper.useWrappedStore(pageProps);
   const [queryClient] = useState(() => new QueryClient());
+
+  console.log(props.pageProps.dehydratedState);
   return (
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
@@ -24,7 +25,7 @@ const App = ({ Component, ...pageProps }: AppProps) => {
           <Layout>
             <Component {...props.pageProps} />
           </Layout>
-          <ReactQueryDevtools initialIsOpen={true} />
+          <ReactQueryDevtools initialIsOpen={false} />
         </Hydrate>
       </QueryClientProvider>
     </Provider>

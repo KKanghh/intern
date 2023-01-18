@@ -2,7 +2,6 @@ import React from "react";
 import { Notice } from "~/types/Notice";
 import MainComponents from ".";
 import dayjs from "dayjs";
-import Link from "next/link";
 import Divider from "~/components/Divider/Divider";
 import { useRouter } from "next/router";
 import { scrollActions } from "~/store/modules/scroll";
