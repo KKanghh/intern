@@ -18,7 +18,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  // overflow-y: scroll;
 `;
 
 const Layout: React.FC<PropsWithChildren> = ({ children }) => {

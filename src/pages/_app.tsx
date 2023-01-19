@@ -16,7 +16,6 @@ const App = ({ Component, ...pageProps }: AppProps) => {
   const { store, props } = wrapper.useWrappedStore(pageProps);
   const [queryClient] = useState(() => new QueryClient());
 
-  console.log(props.pageProps.dehydratedState);
   return (
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
