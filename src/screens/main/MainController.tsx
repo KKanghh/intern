@@ -3,7 +3,7 @@ import {
   useInfiniteQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import request from "~/libs/axios";
+import { getNotice } from "~/libs/getNotice";
 import React, { useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "~/store/modules";
@@ -21,16 +21,6 @@ const MainController: React.FC<MainControllerProps> = ({ props }) => {
   const scroll = useSelector<RootState, number>((state) => state.scroll.scroll);
   const dispatch = useDispatch();
   const divRef = useRef<HTMLDivElement>(null);
-  const fetchData = async ({ pageParam = 1 }) => {
-    const res = await request.get(`/post`, {
-      params: {
-        sort: "createdAt,desc",
-        p: pageParam,
-        // board: "announcement",
-      },
-    });
-    return res.data;
-  };
 
   const {
     data,
@@ -41,7 +31,7 @@ const MainController: React.FC<MainControllerProps> = ({ props }) => {
     isFetching,
     isFetchingNextPage,
     status,
-  } = useInfiniteQuery(["notice"], fetchData, {
+  } = useInfiniteQuery(["notice"], getNotice, {
     getNextPageParam: (lastPage, page) => {
       if (lastPage?.last) return false;
       return page.length + 1;
