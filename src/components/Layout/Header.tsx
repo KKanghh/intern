@@ -1,16 +1,15 @@
 import React from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import { TfiAngleLeft } from "react-icons/tfi";
+import { BsChevronLeft } from "react-icons/bs";
 
 const Container = styled.div`
-  min-height: 101px;
+  min-height: 109px;
   padding: 0 0 0 16px;
 
   span {
-    height: 17px;
     display: inline-block;
-    margin: 58px 0 0 0;
+    margin: 58px 0 0 -5.905px;
   }
 
   span:hover {
@@ -24,7 +23,7 @@ const Header = () => {
   return (
     <Container>
       <span onClick={() => router.back()}>
-        <TfiAngleLeft />
+        <BsChevronLeft size="21" />
       </span>
     </Container>
   );

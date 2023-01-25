@@ -20,6 +20,7 @@ const ListItemTitle = styled.div`
   font-weight: 500;
   font-size: 16px;
   min-height: 25px;
+  line-height: 25px;
   letter-spacing: -0.8px;
   word-break: break-all;
 `;

@@ -4,7 +4,6 @@ import Header from "./Header";
 
 const BackGround = styled.div`
   width: 100%;
-  // min-height: 100vh;
   background-color: Antiquewhite;
 `;
 
