@@ -27,23 +27,21 @@ export const getStaticProps: GetStaticProps = async (
     };
   } catch (err) {
     return {
-      props: { title: "", content: "" },
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
     };
   }
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  try {
-    const res = await request.get(`/post/backup`);
+  const res = await request.get(`/post/backup`);
 
-    return {
-      paths: res.data.map((notice: ResponseProps) => {
-        return { params: { noticeId: notice.id.toString() } };
-      }),
-      fallback: "blocking",
-    };
-  } catch (err) {
-    console.error(err);
-    throw new Error("에러");
-  }
+  return {
+    paths: res.data.map((notice: ResponseProps) => {
+      return { params: { noticeId: notice.id.toString() } };
+    }),
+    fallback: "blocking",
+  };
 };

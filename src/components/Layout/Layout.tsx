@@ -10,7 +10,6 @@ const BackGround = styled.div`
 const Container = styled.div`
   width: 375px;
   min-height: 100vh;
-  // width: 100%;
   background-color: white;
   padding: 0 5px;
   display: flex;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Notice } from "~/types/Notice";
 import MainComponents from ".";
-import dayjs from "dayjs";
+import { dayFormat } from "~/libs/dayFormat";
 import Divider from "~/components/Divider/Divider";
 import { useRouter } from "next/router";
 import { scrollActions } from "~/store/modules/scroll";
@@ -16,10 +16,10 @@ const NoticeListItem: React.FC<NoticeListItemProps> = ({
   notice: { id, title, createdAt },
   lastRef,
 }) => {
-  const date = new Date(createdAt);
-  const display = dayjs(date).format("YYYY.MM.DD");
+  const display = dayFormat(new Date(createdAt));
   const router = useRouter();
   const dispatch = useDispatch();
+
   return (
     <>
       <MainComponents.ListItemDiv
@@ -39,4 +39,4 @@ const NoticeListItem: React.FC<NoticeListItemProps> = ({
   );
 };
 
-export default NoticeListItem;
+export default React.memo(NoticeListItem);
