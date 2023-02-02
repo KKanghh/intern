@@ -2,8 +2,9 @@ import React from "react";
 import MainController from "~/screens/main/MainController";
 import { NextPage } from "next";
 import { getNotice } from "~/libs/getNotice";
+import { response } from "~/types/response";
 
-const Home: NextPage = ({ ...props }) => <MainController props={props} />;
+const Home: NextPage<response> = (props) => <MainController props={props} />;
 
 export default Home;
 

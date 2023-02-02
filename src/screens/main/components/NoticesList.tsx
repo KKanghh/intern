@@ -2,9 +2,10 @@ import React from "react";
 import { Notice } from "~/types/Notice";
 import NoticeListItem from "./NoticeListItem";
 import styled from "styled-components";
+import { post } from "~/types/post";
 
 interface NoticeListProps {
-  notices: Notice[];
+  notices: post[];
   lastRef: React.RefObject<HTMLDivElement>;
 }
 

@@ -1,14 +1,14 @@
 import React from "react";
-import { Notice } from "~/types/Notice";
 import MainComponents from ".";
 import { dayFormat } from "~/libs/dayFormat";
 import Divider from "~/components/Divider/Divider";
 import { useRouter } from "next/router";
 import { scrollActions } from "~/store/modules/scroll";
 import { useDispatch } from "react-redux";
+import { post } from "~/types/post";
 
 interface NoticeListItemProps {
-  notice: Notice;
+  notice: post;
   lastRef: React.RefObject<HTMLDivElement> | null;
 }
 

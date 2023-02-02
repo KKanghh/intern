@@ -1,10 +1,10 @@
 import React, { MouseEventHandler } from "react";
 import MainComponents from "./components";
-import { Notice } from "~/types/Notice";
 import NoticeList from "./components/NoticesList";
+import { post } from "~/types/post";
 
 export interface MainViewProps {
-  notices: Notice[];
+  notices: post[];
   divRef: React.RefObject<HTMLDivElement>;
 }
 
